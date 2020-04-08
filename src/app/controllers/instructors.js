@@ -24,7 +24,9 @@ module.exports = {
   },
 
   show(req, res) {
-    return
+    Instructor.find(req.params.id, functions(instructors) {
+      if(!Instructor) return res.send("Instructor not found.")
+    })
   },
 
   edit(req, res) {
