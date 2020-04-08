@@ -24,7 +24,7 @@ module.exports = {
   },
 
   show(req, res) {
-    Instructor.find(req.params.id, functions(instructors) {
+    Instructor.find(req.params.id, function(instructors) {
       if(!Instructor) return res.send("Instructor not found.")
 
       Instructor.age = age(Instructor.birth)
