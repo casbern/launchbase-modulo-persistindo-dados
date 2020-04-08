@@ -1,12 +1,17 @@
-const { age, date } = require('../../lib/utils')
+const Instructor = require("../models/Instructor")
+const { date } = require('../../lib/utils')
 
 module.exports = {
   index(req, res) {
-  return res.render('instructors/index')
+    Instructor.all(function(instructors) {
+      return res.render("instructors/index", { instructors })
+    })
   },
 
   create(req, res) {
-    return res.render('instructors/create')
+    Instructor.create(req.body, function(instructors) {
+      return res.redirect(`/instructors/${Instructor.id}`)
+    })
   },
 
   post(req, res) {
@@ -15,11 +20,7 @@ module.exports = {
     for(key of keys) {
       if(req.body[key] === "")
         return res.send('Please, fill all the form.')
-    }
-
-    let { avatar_url, birth, name, services, gender } = req.body
-
-    return
+    }    
   },
 
   show(req, res) {
