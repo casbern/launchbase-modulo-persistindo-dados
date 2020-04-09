@@ -44,7 +44,7 @@ module.exports = {
 
       instructor.birth = age(instructor.birth).iso
 
-      return res.render("instructors/show", {instructor})
+      return res.render("instructors/edit", {instructor})
     })
   },
 
