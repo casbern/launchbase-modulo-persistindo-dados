@@ -56,7 +56,10 @@ module.exports = {
         return res.send('Please, fill all the form.')
     }
 
-    return
+    Instructor.update(req.body, function() {
+      return res.redirect(`/instructors/${req.body.id}`)
+    })
+
   },
 
   delete(req, res) {
