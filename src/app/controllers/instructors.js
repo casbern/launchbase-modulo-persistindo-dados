@@ -39,7 +39,13 @@ module.exports = {
   },
 
   edit(req, res) {
-    return
+    Instructor.find(req.params.id, function(instructor) {
+      if(!instructor) return res.send("Instructor not found.")
+
+      instructor.birth = age(instructor.birth).iso
+
+      return res.render("instructors/show", {instructor})
+    })
   },
 
   put(req, res) {
