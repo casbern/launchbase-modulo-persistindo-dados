@@ -1,5 +1,5 @@
 const Instructor = require("../models/Instructor")
-const { date } = require('../lib/utils')
+const { age, date } = require('../lib/utils')
 
 module.exports = {
   index(req, res) {
@@ -9,9 +9,7 @@ module.exports = {
   },
 
   create(req, res) {
-    Instructor.create(req.body, function(instructors) {
-      return res.redirect(`/instructors/${Instructor.id}`)
-    })
+    
   },
 
   post(req, res) {
@@ -21,15 +19,19 @@ module.exports = {
       if(req.body[key] === "")
         return res.send('Please, fill all the form.')
     }    
+
+    Instructor.create(req.body, function(instructor) {
+      return res.redirect(`/instructors/${instructor.id}`)
+    })
   },
 
   show(req, res) {
-    Instructor.find(req.params.id, function(instructors) {
-      if(!Instructor) return res.send("Instructor not found.")
+    Instructor.find(req.params.id, function(instructor) {
+      if(!instructor) return res.send("Instructor not found.")
 
-      Instructor.age = age(Instructor.birth)
-      Instructor.services = Instructor.services.split(",")
-      Instructor.created_at = date(instructor.created_at).format
+      instructor.age = age(instructor.birth)
+      instructor.services = instructor.services.split(",")
+      instructor.created_at = date(instructor.created_at).format
 
       return res.render("instructors/show", {instructor})
 

@@ -7,3 +7,5 @@ CREATE TABLE instructors (
   services TEXT NOT NULL,
   created_at TIMESTAMP NOT NULL
   );
+
+  

@@ -1,11 +1,13 @@
 const db = require("../../config/db")
-const { age, date } = require('../lib/utils')
+const { date } = require('../lib/utils')
 
 
 module.exports = {
-  all() {
+  all(callback) {
     db.query(`SELECT * FROM instructors`, function(err,results) {
       if(err) throw `Database Error. ${err}`
+
+      callback(results.rows) //Essa função é chamada só depois da leitura do banco de dados.
     })
   },
   create(data, callback) {
