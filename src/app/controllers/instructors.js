@@ -9,6 +9,7 @@ module.exports = {
   },
 
   create(req, res) {
+    return res.render('instructors/create')
     
   },
 
@@ -42,7 +43,7 @@ module.exports = {
     Instructor.find(req.params.id, function(instructor) {
       if(!instructor) return res.send("Instructor not found.")
 
-      instructor.birth = age(instructor.birth).iso
+      instructor.birth = date(instructor.birth).iso
 
       return res.render("instructors/edit", {instructor})
     })
