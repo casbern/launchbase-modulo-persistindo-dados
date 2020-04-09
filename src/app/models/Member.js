@@ -4,12 +4,13 @@ const { date } = require('../lib/utils')
 
 module.exports = {
   all(callback) {
-    db.query(`SELECT * FROM members`, function(err,results) {
+    db.query(`SELECT * FROM members ORDER BY name ASC`, function(err,results) {
       if(err) throw `Database Error. ${err}`
 
       callback(results.rows) //Essa função é chamada só depois da leitura do banco de dados.
     })
   },
+
   create(data, callback) {
     const query = `
     INSERT INTO members (
@@ -38,9 +39,10 @@ module.exports = {
     db.query(query, values, function(err, results) {
       if(err) throw `Database Error. ${err}`
 
-      callback(results.row[0])
+      callback(results.rows[0])
     })
   },
+
   find(id, callback) {
     db.query(`SELECT * FROM members WHERE id=$1`, [id], function(err, results) {
       if(err) throw `Database Error. ${err}`
@@ -48,6 +50,7 @@ module.exports = {
       callback(results.rows[0])
     })
   },
+
   update(data, callback) {
     const query = `
     UPDATE members SET
@@ -80,6 +83,7 @@ module.exports = {
       callback()
     })
   },
+
   delete(id, callback) {
     db.query(`DELETE FROM members WHERE id = $1`, [id], function(err, results) {
       if(err) throw `Database Error. ${err}`
