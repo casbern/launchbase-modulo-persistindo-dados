@@ -4,6 +4,7 @@ const { age, date } = require('../lib/utils')
 module.exports = {
   index(req, res) {
     Instructor.all(function(instructors) {
+      //! instructors here is what was passed inside the callback
       return res.render("instructors/index", { instructors })
     })
   },

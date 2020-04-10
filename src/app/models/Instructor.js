@@ -6,8 +6,12 @@ module.exports = {
   all(callback) {
     db.query(`SELECT * FROM instructors ORDER BY name ASC`, function(err,results) {
       if(err) throw `Database Error. ${err}`
+      callback(results.rows) 
+      //This function is called after finished reading database.
+      //Results are an object with many properties. One of it is rows.
+      //Rows are an array of objects.
+      //Each object is an instructor.
 
-      callback(results.rows) //Essa função é chamada só depois da leitura do banco de dados.
     })
   },
 
