@@ -3,10 +3,21 @@ const { age, date } = require('../lib/utils')
 
 module.exports = {
   index(req, res) {
-    Instructor.all(function(instructors) {
-      //! instructors here is what was passed inside the callback
-      return res.render("instructors/index", { instructors })
-    })
+    console.log(req.query)
+
+    const {filter} = req.query
+
+    if(filter) {
+      Instructor.findBy(filter, function(instructors) {
+        return res.render('instructors/index', { instructors, filter })
+      })
+    } else {
+      Instructor.all(function(instructors) {
+        //! instructors here is what was passed inside the callback
+        return res.render("instructors/index", { instructors })
+      })
+    }
+
   },
 
   create(req, res) {
