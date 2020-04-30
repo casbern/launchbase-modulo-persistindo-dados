@@ -4,15 +4,24 @@ const { date } = require('../lib/utils')
 
 module.exports = {
   all(callback) {
-    db.query(`SELECT * FROM instructors ORDER BY name ASC`, function(err,results) {
+
+    db.query(
+      `SELECT instructors.*, count(members) AS total_students
+      FROM instructors 
+      LEFT JOIN members ON (instructors.id = members.instructor_id)
+      GROUP BY instructors.id
+      ORDER BY total_students DESC`, function(err,results) {
+
       if(err) throw `Database Error. ${err}`
-      callback(results.rows) 
+
+      callback(results.rows)  
+
       //This function is called after finished reading database.
       //Results are an object with many properties. One of it is rows.
       //Rows are an array of objects.
       //Each object is an instructor.
 
-    })
+    }) 
   },
 
   create(data, callback) {
