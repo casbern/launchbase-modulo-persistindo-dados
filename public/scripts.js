@@ -40,6 +40,7 @@ function paginate(selectedPage, totalPage) {
 }
 
 const pagination =  document.querySelector(".pagination")
+console.log(pagination)
 
 const page = +pagination.dataset.page
 
