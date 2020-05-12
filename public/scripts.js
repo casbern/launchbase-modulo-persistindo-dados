@@ -15,9 +15,9 @@ function paginate(selectedPage, totalPage) {
 
   for(let currentPage = 1; currentPage <= totalPage; currentPage++) {
     
-    const firstAndLastPage = currentPage == 1 || currentPage == totalPage // 1 == 1 || 1 == 10 => true
+    const firstAndLastPage = currentPage == 1 || currentPage == totalPage 
 
-    const pagesAfterSelectedPage = currentPage <=selectedPage + 2 // 1 <= 6+2
+    const pagesAfterSelectedPage = currentPage <=selectedPage + 2 
 
     const pagesBeforeSelectedPage = currentPage >=selectedPage - 2
 
