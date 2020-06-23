@@ -113,7 +113,11 @@ module.exports = {
 
   paginate(params) {
     const {filter, limit, offset, callback} = params
-
+    console.log('inside paginate params')
+    console.log("filter", filter)
+    console.log("limit", limit)
+    console.log("offset", offset)
+    console.log("callback", callback)
     let query = "",
         filterQuery = "",
         totalQuery = `(
@@ -138,7 +142,11 @@ module.exports = {
     ${filterQuery}
     GROUP BY instructors.id LIMIT $1 OFFSET $2`
 
+    console.log('query', query)
+
     db.query(query, [limit, offset], function(err, results) {
+      console.log('results')
+      console.log(err)
       if(err) throw `Database error! ${err}`
 
       callback(results.rows)

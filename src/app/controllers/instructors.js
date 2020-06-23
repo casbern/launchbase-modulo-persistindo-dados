@@ -3,7 +3,7 @@ const { age, date } = require('../lib/utils')
 
 module.exports = {
   index(req, res) {
-    console.log(req.query)
+    console.log('index')
 
     let {filter, page, limit} = req.query
 
@@ -11,13 +11,14 @@ module.exports = {
     limit = limit || 2
 
     let offset = limit * (page-1)
-
+    console.log('second message')
     const params = {
       filter,
       page,
       limit,
       offset,
       callback(instructors) {
+        console.log('message inside callback')
         const pagination = {
           total: Math.ceil(instructors[0].total/limit), 
           page
